@@ -133,7 +133,7 @@ func getConfigAuditReportFindings(body []byte) ([]types.AwsSecurityFinding, erro
 	// Prepare variables
 	AWSAccountID := aws.ToString(callerIdentity.Account)
 	AWSRegion := cfg.Region
-	ProductArn := fmt.Sprintf("arn:aws:securityhub:%s:%s:product/aquasecurity/aquasecurity", AWSRegion, aws.String(AWSAccountID))
+	ProductArn := fmt.Sprintf("arn:aws:securityhub:%s:%s:product/aquasecurity/aquasecurity", AWSRegion, AWSAccountID)
 	Name := fmt.Sprintf("%s/%s", configAuditReport.OwnerReferences[0].Kind, configAuditReport.OwnerReferences[0].Name)
 
 	// Handle Checks
@@ -261,7 +261,7 @@ func getVulnerabilityReportFindings(body []byte) ([]types.AwsSecurityFinding, er
 	// Prepare variables
 	AWSAccountID := aws.ToString(callerIdentity.Account)
 	AWSRegion := cfg.Region
-	ProductArn := fmt.Sprintf("arn:aws:securityhub:%s::product/aquasecurity/aquasecurity", AWSRegion)
+	ProductArn := fmt.Sprintf("arn:aws:securityhub:%s:%s:product/aquasecurity/aquasecurity", AWSRegion, AWSAccountID)
 	Container := vulnerabilityReport.Labels["trivy-operator.container.name"]
 	Registry := vulnerabilityReport.Report.Registry.Server
 	Repository := vulnerabilityReport.Report.Artifact.Repository
